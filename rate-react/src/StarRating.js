@@ -37,5 +37,6 @@ export default class StarRating extends Component {
 
 
 StarRating.defaultProps = {
-  totalStars: 5
+  totalStars: 5,
+  onChange: f=>f
 }

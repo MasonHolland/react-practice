@@ -36,6 +36,17 @@ class App extends Component {
         }
       ]
     }
+
+    this.rateFeature = this.rateFeature.bind(this)
+  }
+
+  rateFeature(id, rating) {
+    const { features } = this.state
+    this.setState({
+      features: features.map(f =>
+        (f.id !== id) ? f : ({ ...f, rating})
+      )
+    })
   }
 
   render() {
@@ -54,9 +65,15 @@ class App extends Component {
           >
             Learn React
           </a>
-          <StarRating totalStars={7}
-                      starsSelected={3}
-                      onChange={newRating => alert(`new rating ${newRating}`)}/>
+          <div className="features">
+            {this.state.features.map(f =>
+              <div key={f.id}>
+                <h3>{f.title}</h3>
+                <StarRating starsSelected={f.rating}
+                            onChange={rating => this.rateFeature(f.id, rating)} />
+              </div>
+            )}
+          </div>
         </header>
       </div>
     );
